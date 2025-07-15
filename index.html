@@ -6,186 +6,167 @@
     <title>12 Cosas que No Sabías - Equipo Sumato</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .break-words { word-wrap: break-word; overflow-wrap: break-word; }
-        .hidden { display: none; }
-        .grid { display: grid; }
-        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
-        @media (min-width: 768px) {
-            .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .md\\:grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
-        }
-        @media (min-width: 1024px) {
-            .lg\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body class="min-h-screen bg-blue-50">
-    <div id="app">
-        <!-- Header -->
-        <div class="bg-white border-b border-blue-200 p-3">
-            <div class="max-w-3xl mx-auto flex items-center justify-between">
+    <!-- Header -->
+    <div class="bg-white border-b border-blue-200 p-3">
+        <div class="max-w-3xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold">S</div>
+                <div>
+                    <h1 class="text-lg font-bold text-blue-900">12 Cosas que No Sabías - Equipo Sumato</h1>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleStats()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
+                    📊 Stats
+                </button>
+                <button onclick="togglePresentation()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
+                    📺 Presentar
+                </button>
+                <div class="text-sm text-gray-600"><span id="currentQ">1</span>/12</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Panel -->
+    <div id="statsPanel" class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-3 hidden">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex items-center space-x-2 mb-2">
+                <span>📈</span>
+                <h3 class="font-bold">Datos Curiosos</h3>
+            </div>
+            <div class="grid grid-cols-3 md:grid-cols-7 gap-2">
+                <div class="bg-white/20 rounded p-2 text-center">
+                    <div class="text-lg">🎬</div>
+                    <div class="font-semibold text-xs">Interestelar</div>
+                    <div class="text-xs opacity-90">Milwart, Danilo, Patricio</div>
+                </div>
+                <div class="bg-white/20 rounded p-2 text-center">
+                    <div class="text-lg">🎭</div>
+                    <div class="font-semibold text-xs">Futuros actores</div>
+                    <div class="text-xs opacity-90">Patricio y Darío</div>
+                </div>
+                <div class="bg-white/20 rounded p-2 text-center">
+                    <div class="text-lg">🐕</div>
+                    <div class="font-semibold text-xs">Veterinarios</div>
+                    <div class="text-xs opacity-90">Nacho y Camila</div>
+                </div>
+                <div class="bg-white/20 rounded p-2 text-center">
+                    <div class="text-lg">🎸</div>
+                    <div class="font-semibold text-xs">Rock Nacional</div>
+                    <div class="text-xs opacity-90">Nacho, Camila, Darío</div>
+                </div>
+                <div class="bg-white/20 rounded p-2 text-center">
+                    <div class="text-lg">🍝</div>
+                    <div class="font-semibold text-xs">Team Pasta</div>
+                    <div class="text-xs opacity-90">Matías, Danilo, Víctor</div>
+                </div>
+                <div class="bg-white/20 rounded p-2 text-center">
+                    <div class="text-lg">🐔</div>
+                    <div class="font-semibold text-xs">Pollo lovers</div>
+                    <div class="text-xs opacity-90">Milwart y Darío</div>
+                </div>
+                <div class="bg-white/20 rounded p-2 text-center">
+                    <div class="text-lg">📏</div>
+                    <div class="font-semibold text-xs">Más alto</div>
+                    <div class="text-xs opacity-90">Cristián 1.87m</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modo Presentación -->
+    <div id="presentationMode" class="fixed inset-0 bg-gradient-to-br from-blue-900 to-green-900 text-white z-50 hidden">
+        <div class="h-full flex flex-col">
+            <div class="bg-black/30 p-4 flex justify-between items-center">
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold">S</div>
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                        <span class="text-xl font-bold text-blue-900">S</span>
+                    </div>
                     <div>
-                        <h1 class="text-lg font-bold text-blue-900">12 Cosas que No Sabías - Equipo Sumato</h1>
+                        <h1 class="text-3xl font-bold">12 Cosas que No Sabías</h1>
+                        <p class="text-lg text-blue-200">Equipo Sumato</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <button onclick="toggleStats()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
-                        📊 Stats
-                    </button>
-                    <button onclick="togglePresentation()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
-                        📺 Presentar
-                    </button>
-                    <div class="text-sm text-gray-600"><span id="currentQ">1</span>/12</div>
-                </div>
+                <button onclick="togglePresentation()" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg">
+                    Salir
+                </button>
             </div>
-        </div>
 
-        <!-- Stats Panel -->
-        <div id="statsPanel" class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-3 hidden">
-            <div class="max-w-3xl mx-auto">
-                <div class="flex items-center space-x-2 mb-2">
-                    <span>📈</span>
-                    <h3 class="font-bold">Datos Curiosos</h3>
-                </div>
-                <div class="grid grid-cols-3 md:grid-cols-7 gap-2">
-                    <div class="bg-white/20 rounded p-2 text-center">
-                        <div class="text-lg">🎬</div>
-                        <div class="font-semibold text-xs">Interestelar</div>
-                        <div class="text-xs opacity-90">Milwart, Danilo, Patricio</div>
-                    </div>
-                    <div class="bg-white/20 rounded p-2 text-center">
-                        <div class="text-lg">🎭</div>
-                        <div class="font-semibold text-xs">Futuros actores</div>
-                        <div class="text-xs opacity-90">Patricio y Darío</div>
-                    </div>
-                    <div class="bg-white/20 rounded p-2 text-center">
-                        <div class="text-lg">🐕</div>
-                        <div class="font-semibold text-xs">Veterinarios</div>
-                        <div class="text-xs opacity-90">Nacho y Camila</div>
-                    </div>
-                    <div class="bg-white/20 rounded p-2 text-center">
-                        <div class="text-lg">🎸</div>
-                        <div class="font-semibold text-xs">Rock Nacional</div>
-                        <div class="text-xs opacity-90">Nacho, Camila, Darío</div>
-                    </div>
-                    <div class="bg-white/20 rounded p-2 text-center">
-                        <div class="text-lg">🍝</div>
-                        <div class="font-semibold text-xs">Team Pasta</div>
-                        <div class="text-xs opacity-90">Matías, Danilo, Víctor</div>
-                    </div>
-                    <div class="bg-white/20 rounded p-2 text-center">
-                        <div class="text-lg">🐔</div>
-                        <div class="font-semibold text-xs">Pollo lovers</div>
-                        <div class="text-xs opacity-90">Milwart y Darío</div>
-                    </div>
-                    <div class="bg-white/20 rounded p-2 text-center">
-                        <div class="text-lg">📏</div>
-                        <div class="font-semibold text-xs">Más alto</div>
-                        <div class="text-xs opacity-90">Cristián 1.87m</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modo Presentación -->
-        <div id="presentationMode" class="fixed inset-0 bg-gradient-to-br from-blue-900 to-green-900 text-white z-50 hidden">
-            <div class="h-full flex flex-col">
-                <div class="bg-black/30 p-4 flex justify-between items-center">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                            <span class="text-xl font-bold text-blue-900">S</span>
+            <div class="flex-1 flex items-center justify-center p-6">
+                <div class="max-w-6xl w-full">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+                        <div class="flex items-center justify-center space-x-4 mb-6">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                <span id="presentationIcon">👥</span>
+                            </div>
+                            <h2 id="presentationQuestion" class="text-4xl font-bold">¿Cómo te gusta que te digan?</h2>
                         </div>
-                        <div>
-                            <h1 class="text-3xl font-bold">12 Cosas que No Sabías</h1>
-                            <p class="text-lg text-blue-200">Equipo Sumato</p>
+                        
+                        <div id="presentationRevealBtn">
+                            <button onclick="revealPresentationAnswers()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold">
+                                Revelar Respuestas 🎯
+                            </button>
                         </div>
-                    </div>
-                    <button onclick="togglePresentation()" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg">
-                        Salir
-                    </button>
-                </div>
-
-                <div class="flex-1 flex items-center justify-center p-6">
-                    <div class="max-w-6xl w-full">
-                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
-                            <div class="flex items-center justify-center space-x-4 mb-6">
-                                <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-                                    <span id="presentationIcon">👥</span>
-                                </div>
-                                <h2 id="presentationQuestion" class="text-4xl font-bold">¿Cómo te gusta que te digan?</h2>
-                            </div>
-                            
-                            <div id="presentationRevealBtn">
-                                <button onclick="revealPresentationAnswers()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold">
-                                    Revelar Respuestas 🎯
-                                </button>
-                            </div>
-                            
-                            <div id="presentationAnswers" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 hidden">
-                                <!-- Las respuestas se llenan dinámicamente -->
-                            </div>
+                        
+                        <div id="presentationAnswers" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 hidden">
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-black/30 p-4 flex justify-between items-center">
-                    <button onclick="prevQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-blue-600 hover:bg-blue-700">
-                        ← Anterior
-                    </button>
-                    <div class="text-xl font-bold"><span id="presentationCounter">1</span> / 12</div>
-                    <button onclick="nextQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-green-600 hover:bg-green-700">
-                        <span id="nextBtnText">Siguiente</span> →
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contenido Principal -->
-        <div class="max-w-3xl mx-auto p-4">
-            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4">
-                <div class="flex items-center space-x-2 mb-3">
-                    <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white">
-                        <span id="questionIcon">👥</span>
-                    </div>
-                    <h2 id="questionTitle" class="text-xl font-bold text-blue-900">¿Cómo te gusta que te digan?</h2>
-                </div>
-                
-                <div id="revealBtn">
-                    <button onclick="revealAnswers()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-semibold">
-                        Ver Respuestas 👀
-                    </button>
-                </div>
-                
-                <div id="answersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3 hidden">
-                    <!-- Las respuestas se llenan dinámicamente -->
-                </div>
             </div>
 
-            <!-- Navegación -->
-            <div class="flex justify-between items-center">
-                <button onclick="prevQuestion()" class="px-3 py-2 rounded font-semibold bg-blue-500 text-white hover:bg-blue-600" id="prevBtn">
+            <div class="bg-black/30 p-4 flex justify-between items-center">
+                <button onclick="prevQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-blue-600 hover:bg-blue-700">
                     ← Anterior
                 </button>
-
-                <div class="flex space-x-1" id="pagination">
-                    <!-- Los puntos se generan dinámicamente -->
-                </div>
-
-                <button onclick="nextQuestion()" class="px-3 py-2 rounded font-semibold bg-green-500 text-white hover:bg-green-600" id="nextBtn">
-                    <span id="nextText">Siguiente</span> →
+                <div class="text-xl font-bold"><span id="presentationCounter">1</span> / 12</div>
+                <button onclick="nextQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-green-600 hover:bg-green-700">
+                    <span id="nextBtnText">Siguiente</span> →
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- Contenido Principal -->
+    <div class="max-w-3xl mx-auto p-4">
+        <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4">
+            <div class="flex items-center space-x-2 mb-3">
+                <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white">
+                    <span id="questionIcon">👥</span>
+                </div>
+                <h2 id="questionTitle" class="text-xl font-bold text-blue-900">¿Cómo te gusta que te digan?</h2>
+            </div>
+            
+            <div id="revealBtn">
+                <button onclick="revealAnswers()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-semibold">
+                    Ver Respuestas 👀
+                </button>
+            </div>
+            
+            <div id="answersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3 hidden">
+            </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="flex justify-between items-center">
+            <button onclick="prevQuestion()" class="px-3 py-2 rounded font-semibold" id="prevBtn">
+                ← Anterior
+            </button>
+
+            <div class="flex space-x-1" id="pagination">
+            </div>
+
+            <button onclick="nextQuestion()" class="px-3 py-2 rounded font-semibold bg-green-500 text-white hover:bg-green-600" id="nextBtn">
+                <span id="nextText">Siguiente</span> →
+            </button>
+        </div>
+    </div>
+
     <script>
-        // Datos del equipo ordenados alfabéticamente
         const teamData = [
             {
                 name: "Andrea", nickname: "Andre, Andy", height: "1,60",
@@ -338,9 +319,6 @@
         ];
 
         let currentQuestion = 0;
-        let showAnswers = false;
-        let showStats = false;
-        let presentationMode = false;
 
         function updateQuestion() {
             const q = questions[currentQuestion];
@@ -348,13 +326,10 @@
             document.getElementById('questionIcon').textContent = q.icon;
             document.getElementById('currentQ').textContent = currentQuestion + 1;
             
-            // Actualizar presentación
             document.getElementById('presentationQuestion').textContent = q.title;
             document.getElementById('presentationIcon').textContent = q.icon;
             document.getElementById('presentationCounter').textContent = currentQuestion + 1;
             
-            // Resetear respuestas
-            showAnswers = false;
             document.getElementById('revealBtn').classList.remove('hidden');
             document.getElementById('answersGrid').classList.add('hidden');
             document.getElementById('presentationRevealBtn').classList.remove('hidden');
@@ -380,26 +355,26 @@
 
         function updateButtons() {
             const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
             const nextText = document.getElementById('nextText');
             const nextBtnText = document.getElementById('nextBtnText');
             
             prevBtn.disabled = currentQuestion === 0;
-            prevBtn.className = currentQuestion === 0 ? 
-                'px-3 py-2 rounded font-semibold bg-gray-200 text-gray-400' :
-                'px-3 py-2 rounded font-semibold bg-blue-500 text-white hover:bg-blue-600';
+            if (currentQuestion === 0) {
+                prevBtn.className = 'px-3 py-2 rounded font-semibold bg-gray-200 text-gray-400';
+            } else {
+                prevBtn.className = 'px-3 py-2 rounded font-semibold bg-blue-500 text-white hover:bg-blue-600';
+            }
             
             if (currentQuestion === questions.length - 1) {
                 nextText.textContent = 'Reiniciar';
-                nextBtnText.textContent = 'Reiniciar';
+                if (nextBtnText) nextBtnText.textContent = 'Reiniciar';
             } else {
                 nextText.textContent = 'Siguiente';
-                nextBtnText.textContent = 'Siguiente';
+                if (nextBtnText) nextBtnText.textContent = 'Siguiente';
             }
         }
 
         function revealAnswers() {
-            showAnswers = true;
             document.getElementById('revealBtn').classList.add('hidden');
             const grid = document.getElementById('answersGrid');
             grid.classList.remove('hidden');
@@ -426,6 +401,33 @@
                     <div class="text-sm p-2 rounded break-words ${
                         isWaiting ? 'bg-yellow-100 text-yellow-800 italic' : 'bg-white text-gray-700'
                     }">
+                        ${member[q.key]}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function revealPresentationAnswers() {
+            document.getElementById('presentationRevealBtn').classList.add('hidden');
+            const grid = document.getElementById('presentationAnswers');
+            grid.classList.remove('hidden');
+            
+            const q = questions[currentQuestion];
+            grid.innerHTML = '';
+            
+            teamData.filter(m => !m[q.key].includes('⏳')).forEach(member => {
+                const card = document.createElement('div');
+                card.className = 'bg-white/20 rounded-lg p-4';
+                
+                card.innerHTML = `
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
+                            ${member.name.charAt(0)}
+                        </div>
+                        <div class="font-bold text-lg">${member.name}</div>
+                    </div>
+                    <div class="text-sm bg-white/10 rounded p-3 break-words">
                         ${member[q.key]}
                     </div>
                 `;
@@ -471,54 +473,17 @@
         }
 
         function toggleStats() {
-            showStats = !showStats;
             const panel = document.getElementById('statsPanel');
-            if (showStats) {
-                panel.classList.remove('hidden');
-            } else {
-                panel.classList.add('hidden');
-            }
+            panel.classList.toggle('hidden');
         }
 
         function togglePresentation() {
-            presentationMode = !presentationMode;
             const modal = document.getElementById('presentationMode');
-            if (presentationMode) {
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
+            modal.classList.toggle('hidden');
         }
 
         // Inicializar
         updateQuestion();
     </script>
 </body>
-</html>d(card);
-            });
-        }
-
-        function revealPresentationAnswers() {
-            document.getElementById('presentationRevealBtn').classList.add('hidden');
-            const grid = document.getElementById('presentationAnswers');
-            grid.classList.remove('hidden');
-            
-            const q = questions[currentQuestion];
-            grid.innerHTML = '';
-            
-            teamData.filter(m => !m[q.key].includes('⏳')).forEach(member => {
-                const card = document.createElement('div');
-                card.className = 'bg-white/20 rounded-lg p-4';
-                
-                card.innerHTML = `
-                    <div class="flex items-center space-x-2 mb-3">
-                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
-                            ${member.name.charAt(0)}
-                        </div>
-                        <div class="font-bold text-lg">${member.name}</div>
-                    </div>
-                    <div class="text-sm bg-white/10 rounded p-3 break-words">
-                        ${member[q.key]}
-                    </div>
-                `;
-                grid.appendChil
+</html>
