@@ -591,7 +591,6 @@
             const q = questions[currentQuestion];
             document.getElementById('questionTitle').textContent = q.title;
             document.getElementById('questionIcon').textContent = q.icon;
-            document.getElementById('currentQ').textContent = currentQuestion + 1;
             
             document.getElementById('revealBtn').classList.remove('hidden');
             document.getElementById('answersGrid').classList.add('hidden');
@@ -654,8 +653,7 @@
         }
 
         function toggleStats() {
-            const panel = document.getElementById('statsPanel');
-            panel.classList.toggle('hidden');
+            // Esta función ya no es necesaria pero la mantengo para evitar errores
         }
 
         function togglePresentation() {
