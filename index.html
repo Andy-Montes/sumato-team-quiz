@@ -16,9 +16,15 @@
             padding: 8px;
         }
         .presentation-scroll { 
-            max-height: 500px; 
+            max-height: 400px; 
             overflow-y: auto; 
             padding: 8px;
+        }
+        /* Móvil: altura más pequeña para scroll */
+        @media (max-width: 768px) {
+            .presentation-scroll {
+                max-height: 250px;
+            }
         }
         .grid-container {
             display: grid;
@@ -151,11 +157,11 @@
             </div>
 
             <div class="bg-black/30 p-4 flex justify-between items-center">
-                <button onclick="prevQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-blue-600 hover:bg-blue-700">
+                <button onclick="prevQuestionPresentation()" class="px-3 py-2 rounded-lg font-bold bg-blue-600 hover:bg-blue-700 text-sm">
                     ← Anterior
                 </button>
-                <div class="text-xl font-bold"><span id="presentationCounter">1</span> / 12</div>
-                <button onclick="nextQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-green-600 hover:bg-green-700">
+                <div class="text-lg font-bold"><span id="presentationCounter">1</span> / 12</div>
+                <button onclick="nextQuestionPresentation()" class="px-3 py-2 rounded-lg font-bold bg-green-600 hover:bg-green-700 text-sm">
                     <span id="nextBtnText">Siguiente</span> →
                 </button>
             </div>
@@ -442,14 +448,30 @@
         let showWelcome = true;
 
         function startPresentation() {
-            showWelcome = false;
+            // Eliminar pantalla de bienvenida
             document.getElementById('welcomeScreen').classList.add('hidden');
-            document.getElementById('quizScreen').classList.remove('hidden');
-            updateQuestion();
-            // Ir directo a modo presentación
-            setTimeout(() => {
-                togglePresentation();
-            }, 100);
+            // Ir DIRECTO a presentación sin pantalla intermedia
+            const modal = document.getElementById('presentationMode');
+            modal.classList.remove('hidden');
+            // Inicializar la primera pregunta en presentación
+            currentQuestion = 0;
+            updatePresentationQuestion();
+        }
+        function updatePresentationQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('presentationQuestion').textContent = q.title;
+            document.getElementById('presentationIcon').textContent = q.icon;
+            document.getElementById('presentationCounter').textContent = currentQuestion + 1;
+            
+            // Resetear respuestas
+            document.getElementById('presentationRevealBtn').classList.remove('hidden');
+            document.getElementById('presentationAnswers').classList.add('hidden');
+            
+            // Actualizar botón siguiente
+            const nextBtnText = document.getElementById('nextBtnText');
+            if (nextBtnText) {
+                nextBtnText.textContent = currentQuestion === questions.length - 1 ? 'Reiniciar' : 'Siguiente';
+            }
         }
         function updateQuestion() {
             if (showWelcome) return;
@@ -459,14 +481,8 @@
             document.getElementById('questionIcon').textContent = q.icon;
             document.getElementById('currentQ').textContent = currentQuestion + 1;
             
-            document.getElementById('presentationQuestion').textContent = q.title;
-            document.getElementById('presentationIcon').textContent = q.icon;
-            document.getElementById('presentationCounter').textContent = currentQuestion + 1;
-            
             document.getElementById('revealBtn').classList.remove('hidden');
             document.getElementById('answersGrid').classList.add('hidden');
-            document.getElementById('presentationRevealBtn').classList.remove('hidden');
-            document.getElementById('presentationAnswers').classList.add('hidden');
             
             updatePagination();
             updateButtons();
@@ -592,13 +608,13 @@
             } else {
                 currentQuestion = 0;
             }
-            updateQuestion();
+            updatePresentationQuestion();
         }
 
         function prevQuestionPresentation() {
             if (currentQuestion > 0) {
                 currentQuestion--;
-                updateQuestion();
+                updatePresentationQuestion();
             }
         }
 
