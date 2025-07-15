@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Cosas que No Sabías - Equipo Sumato</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .break-words { word-wrap: break-word; overflow-wrap: break-word; }
+        .hidden { display: none; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+        @media (min-width: 768px) {
+            .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\\:grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+        }
+        @media (min-width: 1024px) {
+            .lg\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-blue-50">
+    <div id="app">
+        <!-- Header -->
+        <div class="bg-white border-b border-blue-200 p-3">
+            <div class="max-w-3xl mx-auto flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold">S</div>
+                    <div>
+                        <h1 class="text-lg font-bold text-blue-900">12 Cosas que No Sabías - Equipo Sumato</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="toggleStats()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
+                        📊 Stats
+                    </button>
+                    <button onclick="togglePresentation()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
+                        📺 Presentar
+                    </button>
+                    <div class="text-sm text-gray-600"><span id="currentQ">1</span>/12</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div id="statsPanel" class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-3 hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span>📈</span>
+                    <h3 class="font-bold">Datos Curiosos</h3>
+                </div>
+                <div class="grid grid-cols-3 md:grid-cols-7 gap-2">
+                    <div class="bg-white/20 rounded p-2 text-center">
+                        <div class="text-lg">🎬</div>
+                        <div class="font-semibold text-xs">Interestelar</div>
+                        <div class="text-xs opacity-90">Milwart, Danilo, Patricio</div>
+                    </div>
+                    <div class="bg-white/20 rounded p-2 text-center">
+                        <div class="text-lg">🎭</div>
+                        <div class="font-semibold text-xs">Futuros actores</div>
+                        <div class="text-xs opacity-90">Patricio y Darío</div>
+                    </div>
+                    <div class="bg-white/20 rounded p-2 text-center">
+                        <div class="text-lg">🐕</div>
+                        <div class="font-semibold text-xs">Veterinarios</div>
+                        <div class="text-xs opacity-90">Nacho y Camila</div>
+                    </div>
+                    <div class="bg-white/20 rounded p-2 text-center">
+                        <div class="text-lg">🎸</div>
+                        <div class="font-semibold text-xs">Rock Nacional</div>
+                        <div class="text-xs opacity-90">Nacho, Camila, Darío</div>
+                    </div>
+                    <div class="bg-white/20 rounded p-2 text-center">
+                        <div class="text-lg">🍝</div>
+                        <div class="font-semibold text-xs">Team Pasta</div>
+                        <div class="text-xs opacity-90">Matías, Danilo, Víctor</div>
+                    </div>
+                    <div class="bg-white/20 rounded p-2 text-center">
+                        <div class="text-lg">🐔</div>
+                        <div class="font-semibold text-xs">Pollo lovers</div>
+                        <div class="text-xs opacity-90">Milwart y Darío</div>
+                    </div>
+                    <div class="bg-white/20 rounded p-2 text-center">
+                        <div class="text-lg">📏</div>
+                        <div class="font-semibold text-xs">Más alto</div>
+                        <div class="text-xs opacity-90">Cristián 1.87m</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modo Presentación -->
+        <div id="presentationMode" class="fixed inset-0 bg-gradient-to-br from-blue-900 to-green-900 text-white z-50 hidden">
+            <div class="h-full flex flex-col">
+                <div class="bg-black/30 p-4 flex justify-between items-center">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-xl font-bold text-blue-900">S</span>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold">12 Cosas que No Sabías</h1>
+                            <p class="text-lg text-blue-200">Equipo Sumato</p>
+                        </div>
+                    </div>
+                    <button onclick="togglePresentation()" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg">
+                        Salir
+                    </button>
+                </div>
+
+                <div class="flex-1 flex items-center justify-center p-6">
+                    <div class="max-w-6xl w-full">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center">
+                            <div class="flex items-center justify-center space-x-4 mb-6">
+                                <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                    <span id="presentationIcon">👥</span>
+                                </div>
+                                <h2 id="presentationQuestion" class="text-4xl font-bold">¿Cómo te gusta que te digan?</h2>
+                            </div>
+                            
+                            <div id="presentationRevealBtn">
+                                <button onclick="revealPresentationAnswers()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold">
+                                    Revelar Respuestas 🎯
+                                </button>
+                            </div>
+                            
+                            <div id="presentationAnswers" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 hidden">
+                                <!-- Las respuestas se llenan dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 p-4 flex justify-between items-center">
+                    <button onclick="prevQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-blue-600 hover:bg-blue-700">
+                        ← Anterior
+                    </button>
+                    <div class="text-xl font-bold"><span id="presentationCounter">1</span> / 12</div>
+                    <button onclick="nextQuestionPresentation()" class="px-4 py-2 rounded-lg font-bold bg-green-600 hover:bg-green-700">
+                        <span id="nextBtnText">Siguiente</span> →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="max-w-3xl mx-auto p-4">
+            <div class="bg-white rounded-lg shadow border border-blue-200 p-4 mb-4">
+                <div class="flex items-center space-x-2 mb-3">
+                    <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white">
+                        <span id="questionIcon">👥</span>
+                    </div>
+                    <h2 id="questionTitle" class="text-xl font-bold text-blue-900">¿Cómo te gusta que te digan?</h2>
+                </div>
+                
+                <div id="revealBtn">
+                    <button onclick="revealAnswers()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-semibold">
+                        Ver Respuestas 👀
+                    </button>
+                </div>
+                
+                <div id="answersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3 hidden">
+                    <!-- Las respuestas se llenan dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="flex justify-between items-center">
+                <button onclick="prevQuestion()" class="px-3 py-2 rounded font-semibold bg-blue-500 text-white hover:bg-blue-600" id="prevBtn">
+                    ← Anterior
+                </button>
+
+                <div class="flex space-x-1" id="pagination">
+                    <!-- Los puntos se generan dinámicamente -->
+                </div>
+
+                <button onclick="nextQuestion()" class="px-3 py-2 rounded font-semibold bg-green-500 text-white hover:bg-green-600" id="nextBtn">
+                    <span id="nextText">Siguiente</span> →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos del equipo ordenados alfabéticamente
+        const teamData = [
+            {
+                name: "Andrea", nickname: "Andre, Andy", height: "1,60",
+                superpower: "segun mis hijos cocinar bien, segun yo haber tenido hijos",
+                food: "ninguna, no disfruto comer", skill: "cantar los pollitos dicen al revés",
+                movie: "Muchas, Star Wars, Marvel y DC, Full Ciencia Ficcion y Acción, también de viajes en el tiempo",
+                fear: "la sangre", job: "Directora de espectáculos musicales masivos",
+                ritual: "Dibujar letras A cuando necesito concentración", collection: "Imanes de refri",
+                music: "Melomana Total !", spontaneous: "echar a mi marido de la casa (ahora ex-marido)"
+            },
+            {
+                name: "Augusto", nickname: "Ogost", height: "176", superpower: "Enciendo Autos",
+                food: "Quesos", skill: "Enciendo Autos", movie: "El dia de la marmota",
+                fear: "Nunca llegar a tener todos los datos completos", job: "Catador de restaurantes",
+                ritual: "Rezo la oracion de la ruta", collection: "Cafeteras",
+                music: "De todo, depende del momento", spontaneous: "Me tome un bondi a Rosario por una chica"
+            },
+            {
+                name: "Cael", nickname: "Cá-el", height: "177cm", superpower: "Los videojuegos de tactica",
+                food: "Arroz chino chaufa de mariscos (comida peruana)",
+                skill: "Hacer compras del hogar y que me sobre arta plata.",
+                movie: "Hombres de honor", fear: "Los ratones",
+                job: "Economista, administrador, o banquero",
+                ritual: "Lavarme los pies con agua calientisima antes de dormir.",
+                collection: "Papel higiénico o servilletas. Siempre tengo una en el bolsillo y no se como llegan ahí.",
+                music: "Música de cámara clásica romántica",
+                spontaneous: "Cuando invitaron a mi hijo a un cumple, entramos, atravesamos multitudes,hicimos una fila larguisima y finalmente encontramos a Victoria. La encontramos y no era una niña! Era un mujer que se llamaba también Victoria, estaba embarazada y la fiesta no era un cumple, Erda un babyshower!!! Le hable y le pregunté por la cumpleañera y dijo q había otra fiesta al lado. Felicite a los padres, salude al público, sonreí y salimos lentamente con mi hijo. Nos llevamos el regalo a la fiesta correcta."
+            },
+            {
+                name: "Camila", nickname: "Cami", height: "1.69",
+                superpower: "soy buena memorizando numeros, dnis, telefonos, etc",
+                food: "papa, papas fritas, papas rusticas, al horno. Todo papa",
+                skill: "muevo las orejas y la nariz sin mover el resto de la cara",
+                movie: "Friends o Criminal Minds", fear: "Accidentes", job: "Veterinaria",
+                ritual: "no es extraño pero antes de dormir tomo algun té.", collection: "Tazas",
+                music: "rock nacional + un poco de todo", spontaneous: "viaje con amigos"
+            },
+            {
+                name: "Cristián", nickname: "Pitbull - Pit me dicen amigos del fútbol", height: "1.87",
+                superpower: "No tengo", food: "Manjarate", skill: "Jugar bien al pickleball - 5 de Chile",
+                movie: "El secreto de sus ojos - Campanella / La vida es bella - Roberto Benigni",
+                fear: "Muerte", job: "Apicultura",
+                ritual: "Cambiarme zapatos a zapatillas - zapatillas a zapatos tres veces por día",
+                collection: "Camisetas de fútbol", music: "Oasis - Britpop",
+                spontaneous: "Ir al cine o teatro solo. Me carga depender de otros."
+            },
+            {
+                name: "Danilo",
+                nickname: "MáximoDécimoMeridioComandanteDeLosEjércitosDelNorteGeneralDeLasLegionesFénixLealSirvienteDelUnicoEmperadorMarcoAurelioPadreDeUnHijoAsesinadoEsposoDeUnaEsposaAsesinadaYJuroQueMeVengaréEnEstaVidaOEnLaPróxima o Dani",
+                height: "175", superpower: "el ping pong, por poner algo jaja",
+                food: "Todas las combinaciones posibles con pastas",
+                skill: "no sé si extraño, pero en su momento jugaba tanto ping pong que comencé a jugar con la mano no hábil",
+                movie: "The big bang theory, interstellar",
+                fear: "Cuando chico le tenía miedo heavy a los muñecos, después de ver chucky",
+                job: "En mi vida alternativa no trabajo :)",
+                ritual: "a veces tengo un toc con mantener las cosas en su mismo lugar, pero se maneja, pasa que la gente es desordenada",
+                collection: "Ahora no, pero cuando chico coleccionaba tazos de pokemon, digimon, y todo lo terminado en mon jaja",
+                music: "De todo un poco, pero en su mayoría más tirado a electrónica",
+                spontaneous: "querer conocer un lugar y acto seguido comprar pasajes para ir por decir algo"
+            },
+            {
+                name: "Darío", nickname: "Dario (Daro puede ser tmb)", height: "1,80",
+                superpower: "Leo mentes", food: "Pollo", skill: "Memoria Visual",
+                movie: "El secreto de sus ojos", fear: "A que se venda y no este la solución lista",
+                job: "Actor", ritual: "La mañana", collection: "Anecdotas",
+                music: "Rock nacional", spontaneous: "Irme de viaje"
+            },
+            {
+                name: "Diego", nickname: "Diego", height: "⏳ Esperando respuesta...",
+                superpower: "⏳ Esperando respuesta...", food: "⏳ Esperando respuesta...",
+                skill: "⏳ Esperando respuesta...", movie: "⏳ Esperando respuesta...",
+                fear: "⏳ Esperando respuesta...", job: "⏳ Esperando respuesta...",
+                ritual: "⏳ Esperando respuesta...", collection: "⏳ Esperando respuesta...",
+                music: "⏳ Esperando respuesta...", spontaneous: "⏳ Esperando respuesta..."
+            },
+            {
+                name: "José Tomás", nickname: "Jose o Jota", height: "181", superpower: "Empatia",
+                food: "Pizza", skill: "Gamifico todo lo que hago", movie: "GOT / DJANGO / AOT",
+                fear: "El pasar del tiempo", job: "Constructor o arquitecto",
+                ritual: "Si me despierto antes de la alarma tengo un buen dia",
+                collection: "Imanes de refrigerador y vasos de shot", music: "Folk, Electronica, Jazz",
+                spontaneous: "Irme a trabajar a USA por una temporada"
+            },
+            {
+                name: "Juan Ignacio", nickname: "Nacho", height: "1.79",
+                superpower: "Certera primera impresión de la gente", food: "Ñoquis",
+                skill: "Mi paciencia 😉😉", movie: "101 dálmatas",
+                fear: "No sé si miedo, pero hablar en público me cuesta horrores", job: "Veterinario",
+                ritual: "Pongo el papel higiénico al revés", collection: "Tendría una pareja animal de cada especie",
+                music: "Rock nacional, cuarteto, cumbia, sertanejo, cachengue en general",
+                spontaneous: "Me fui a anotar para ingenieria en sistemas y llenando los papeles me anote para Administración. El día que tenía una segunda entrevista para jóvenes líderes en PyG no fui y me junté con Ogost por primera vez y me mostró Sumato"
+            },
+            {
+                name: "Matías", nickname: "Mati, Matías", height: "184",
+                superpower: "Convertir café en soluciones", food: "Cualquier tipo de pasta (espagueti nro 1)",
+                skill: "Escribir sin mirar ni la pantalla ni el teclado",
+                movie: "Gigantes de Acero o Star Wars (sino de deportes)", fear: "Sindrome del impostor",
+                job: "Ingeniero industrial (uno realista) o fotógrafo de National Geographic",
+                ritual: "Poner en YouTube videos de temporizador Pomodoro de 2 o 3 horas.",
+                collection: "Cascos de Star Wars (Planeta de agostini)",
+                music: "House / Trap / Indie o cualquier cosa de moda",
+                spontaneous: "La primera vez que hice mtb (pd: termine en el suelo)"
+            },
+            {
+                name: "Milwart", nickname: "Maverick :3", height: "1.7",
+                superpower: "Tengo acceso a mucha información", food: "Pollo a la brasa",
+                skill: "Empatia", movie: "Interestelar", fear: "A la inmensidad del universo",
+                job: "Astronauta", ritual: "a la hora de dormir", collection: "recuerdos :v",
+                music: "Indie Rock (Siddhartha, Camilo septimo)", spontaneous: "cambiarme las notas"
+            },
+            {
+                name: "Patricio", nickname: "Pato 🦆", height: "Me mataste, creo que 1.72",
+                superpower: "Reconocer juegos solo viendo pocos detalles de una imagen (No se si estar orgulloso o no...)",
+                food: "Sushi 🍣", skill: "404 Not found.", movie: "Interestelar ⭐",
+                fear: "Tripanofobia, miedo a las agujas", job: "Actor 🎭",
+                ritual: "Musica y sahumerios, nunca fallan", collection: "Me gusta coleccionar tonterias de Minecraft",
+                music: "Un poco de todo, del lado conocido puedo decir: Justine Bieber, Black Eyed Pease, Daft Punk. Del lado no conocido: Bhavi, Rojuu, Zell. En general me gusta mucho el sonido electrónico",
+                spontaneous: "Inscribirme a una facultad y abandonarla el primer día ya habiendo pagado todo un semestre"
+            },
+            {
+                name: "Tomás", nickname: "Tomás", height: "⏳ Esperando respuesta...",
+                superpower: "⏳ Esperando respuesta...", food: "⏳ Esperando respuesta...",
+                skill: "⏳ Esperando respuesta...", movie: "⏳ Esperando respuesta...",
+                fear: "⏳ Esperando respuesta...", job: "⏳ Esperando respuesta...",
+                ritual: "⏳ Esperando respuesta...", collection: "⏳ Esperando respuesta...",
+                music: "⏳ Esperando respuesta...", spontaneous: "⏳ Esperando respuesta..."
+            },
+            {
+                name: "Víctor", nickname: "Che Vic", height: "1,69",
+                superpower: "Ir caminando por la calle y presenciar un asalto, ahí es donde destruyo al ladrón a puras piñas",
+                food: "Pasta con huevos", skill: "Doblarme los párpados", movie: "Sangre por sangre",
+                fear: "El fin del mundo", job: "Profesor", ritual: "Me imagino alentándome mientras entreno",
+                collection: "Jockeys", music: "Punk rock!", spontaneous: "Saltar desde un tercer piso"
+            }
+        ];
+
+        const questions = [
+            { title: "¿Cómo te gusta que te digan?", icon: "👥", key: "nickname" },
+            { title: "¿Cuánto mides?", icon: "👁️", key: "height" },
+            { title: "¿Cuál es tu superpoder secreto?", icon: "⚡", key: "superpower" },
+            { title: "¿Qué comida podrías comer todos los días?", icon: "🍕", key: "food" },
+            { title: "¿Cuál es la habilidad más extraña que tienes?", icon: "🎭", key: "skill" },
+            { title: "¿Cuál es tu serie o película favorita?", icon: "🎬", key: "movie" },
+            { title: "¿Cuál es tu mayor miedo irracional?", icon: "👻", key: "fear" },
+            { title: "¿Qué trabajo tendrías en una vida alternativa?", icon: "🚀", key: "job" },
+            { title: "¿Cuál es tu ritual más extraño?", icon: "🕐", key: "ritual" },
+            { title: "¿Te gusta coleccionar algo?", icon: "🎁", key: "collection" },
+            { title: "¿Qué música te gusta?", icon: "🎵", key: "music" },
+            { title: "¿Qué es lo más espontáneo que has hecho?", icon: "🎲", key: "spontaneous" }
+        ];
+
+        let currentQuestion = 0;
+        let showAnswers = false;
+        let showStats = false;
+        let presentationMode = false;
+
+        function updateQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionTitle').textContent = q.title;
+            document.getElementById('questionIcon').textContent = q.icon;
+            document.getElementById('currentQ').textContent = currentQuestion + 1;
+            
+            // Actualizar presentación
+            document.getElementById('presentationQuestion').textContent = q.title;
+            document.getElementById('presentationIcon').textContent = q.icon;
+            document.getElementById('presentationCounter').textContent = currentQuestion + 1;
+            
+            // Resetear respuestas
+            showAnswers = false;
+            document.getElementById('revealBtn').classList.remove('hidden');
+            document.getElementById('answersGrid').classList.add('hidden');
+            document.getElementById('presentationRevealBtn').classList.remove('hidden');
+            document.getElementById('presentationAnswers').classList.add('hidden');
+            
+            updatePagination();
+            updateButtons();
+        }
+
+        function updatePagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            for (let i = 0; i < questions.length; i++) {
+                const dot = document.createElement('button');
+                dot.className = `w-2 h-2 rounded-full ${
+                    i === currentQuestion ? 'bg-green-500' : 
+                    i < currentQuestion ? 'bg-blue-500' : 'bg-gray-300'
+                }`;
+                dot.onclick = () => goToQuestion(i);
+                pagination.appendChild(dot);
+            }
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const nextText = document.getElementById('nextText');
+            const nextBtnText = document.getElementById('nextBtnText');
+            
+            prevBtn.disabled = currentQuestion === 0;
+            prevBtn.className = currentQuestion === 0 ? 
+                'px-3 py-2 rounded font-semibold bg-gray-200 text-gray-400' :
+                'px-3 py-2 rounded font-semibold bg-blue-500 text-white hover:bg-blue-600';
+            
+            if (currentQuestion === questions.length - 1) {
+                nextText.textContent = 'Reiniciar';
+                nextBtnText.textContent = 'Reiniciar';
+            } else {
+                nextText.textContent = 'Siguiente';
+                nextBtnText.textContent = 'Siguiente';
+            }
+        }
+
+        function revealAnswers() {
+            showAnswers = true;
+            document.getElementById('revealBtn').classList.add('hidden');
+            const grid = document.getElementById('answersGrid');
+            grid.classList.remove('hidden');
+            
+            const q = questions[currentQuestion];
+            grid.innerHTML = '';
+            
+            teamData.forEach(member => {
+                const isWaiting = member[q.key].includes('⏳');
+                const card = document.createElement('div');
+                card.className = `p-3 rounded border-2 ${
+                    isWaiting ? 'bg-yellow-50 border-yellow-300 border-dashed' : 'bg-blue-50 border-blue-200'
+                }`;
+                
+                card.innerHTML = `
+                    <div class="flex items-center space-x-2 mb-2">
+                        <div class="w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold ${
+                            isWaiting ? 'bg-yellow-500' : 'bg-green-500'
+                        }">
+                            ${isWaiting ? '⏳' : member.name.charAt(0)}
+                        </div>
+                        <div class="font-semibold text-blue-900 text-sm">${member.name}</div>
+                    </div>
+                    <div class="text-sm p-2 rounded break-words ${
+                        isWaiting ? 'bg-yellow-100 text-yellow-800 italic' : 'bg-white text-gray-700'
+                    }">
+                        ${member[q.key]}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+            } else {
+                currentQuestion = 0;
+            }
+            updateQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuestion();
+            }
+        }
+
+        function nextQuestionPresentation() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+            } else {
+                currentQuestion = 0;
+            }
+            updateQuestion();
+        }
+
+        function prevQuestionPresentation() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuestion();
+            }
+        }
+
+        function goToQuestion(index) {
+            currentQuestion = index;
+            updateQuestion();
+        }
+
+        function toggleStats() {
+            showStats = !showStats;
+            const panel = document.getElementById('statsPanel');
+            if (showStats) {
+                panel.classList.remove('hidden');
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+
+        function togglePresentation() {
+            presentationMode = !presentationMode;
+            const modal = document.getElementById('presentationMode');
+            if (presentationMode) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Inicializar
+        updateQuestion();
+    </script>
+</body>
+</html>d(card);
+            });
+        }
+
+        function revealPresentationAnswers() {
+            document.getElementById('presentationRevealBtn').classList.add('hidden');
+            const grid = document.getElementById('presentationAnswers');
+            grid.classList.remove('hidden');
+            
+            const q = questions[currentQuestion];
+            grid.innerHTML = '';
+            
+            teamData.filter(m => !m[q.key].includes('⏳')).forEach(member => {
+                const card = document.createElement('div');
+                card.className = 'bg-white/20 rounded-lg p-4';
+                
+                card.innerHTML = `
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
+                            ${member.name.charAt(0)}
+                        </div>
+                        <div class="font-bold text-lg">${member.name}</div>
+                    </div>
+                    <div class="text-sm bg-white/10 rounded p-3 break-words">
+                        ${member[q.key]}
+                    </div>
+                `;
+                grid.appendChil
