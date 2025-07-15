@@ -203,22 +203,42 @@
                 </div>
             </div>
 
-            <!-- Datos Curiosos Destacados -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <!-- Datos Curiosos Completos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                 <div class="bg-white/20 rounded-lg p-4">
-                    <div class="text-2xl mb-2">🎬 Dato Curioso</div>
-                    <div class="font-semibold">¡3 personas aman Interestelar!</div>
+                    <div class="text-2xl mb-2">🎬 Interestelar</div>
+                    <div class="font-semibold">3 personas la aman</div>
                     <div class="text-sm text-blue-100">Milwart, Danilo y Patricio</div>
                 </div>
                 <div class="bg-white/20 rounded-lg p-4">
-                    <div class="text-2xl mb-2">🥊 Más Espontáneo</div>
-                    <div class="font-semibold">¡Tomás peleó en Tailandia!</div>
-                    <div class="text-sm text-blue-100">En un ring contra un irlandés</div>
+                    <div class="text-2xl mb-2">🎭 Futuros actores</div>
+                    <div class="font-semibold">2 compañeros</div>
+                    <div class="text-sm text-blue-100">Patricio y Darío</div>
+                </div>
+                <div class="bg-white/20 rounded-lg p-4">
+                    <div class="text-2xl mb-2">🐕 Veterinarios</div>
+                    <div class="font-semibold">2 amantes de animales</div>
+                    <div class="text-sm text-blue-100">Nacho y Camila</div>
+                </div>
+                <div class="bg-white/20 rounded-lg p-4">
+                    <div class="text-2xl mb-2">🎸 Rock Nacional</div>
+                    <div class="font-semibold">3 fanáticos</div>
+                    <div class="text-sm text-blue-100">Nacho, Camila y Darío</div>
+                </div>
+                <div class="bg-white/20 rounded-lg p-4">
+                    <div class="text-2xl mb-2">🍝 Team Pasta</div>
+                    <div class="font-semibold">3 amantes</div>
+                    <div class="text-sm text-blue-100">Matías, Danilo y Víctor</div>
+                </div>
+                <div class="bg-white/20 rounded-lg p-4">
+                    <div class="text-2xl mb-2">📏 Extremos</div>
+                    <div class="font-semibold">Más alto vs Más bajo</div>
+                    <div class="text-sm text-blue-100">Cristián 1.87m vs Topo 1.62m</div>
                 </div>
             </div>
 
-            <button onclick="startQuiz()" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-xl hover:bg-blue-50 transition-colors">
-                ¡Comenzar el Quiz! 🚀
+            <button onclick="startPresentation()" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-xl hover:bg-blue-50 transition-colors">
+                ¡Descubre las Respuestas de tus Compañeros! 🚀
             </button>
         </div>
 
@@ -421,11 +441,15 @@
         let currentQuestion = 0;
         let showWelcome = true;
 
-        function startQuiz() {
+        function startPresentation() {
             showWelcome = false;
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.remove('hidden');
             updateQuestion();
+            // Ir directo a modo presentación
+            setTimeout(() => {
+                togglePresentation();
+            }, 100);
         }
         function updateQuestion() {
             if (showWelcome) return;
